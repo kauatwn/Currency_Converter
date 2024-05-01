@@ -15,7 +15,7 @@ namespace Currency_Converter.Services
             };
         }
 
-        public async Task<CurrencyConversionResponseDTO> ConvertCurrency(string baseCode, string targetCode, decimal amount)
+        public async Task<CurrencyConversionResponseDTO> ConvertCurrency(string baseCode, string targetCode, long amount)
         {
             var response = await HttpClient.GetAsync($"v6/ea1dac06c76d73e87ffd46f9/pair/{baseCode}/{targetCode}/{amount}");
 

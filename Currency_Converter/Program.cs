@@ -7,12 +7,12 @@ Console.WriteLine("Seja bem-vindo ao conversor de moedas!\n");
 
 Console.WriteLine("Escolha uma opção abaixo para fazer a conversão:\n");
 
-Console.WriteLine("[1] Real (BRL) -> Dólar (USD)");
-Console.WriteLine("[2] Real (BRL) -> Euro (EUR)");
-Console.WriteLine("[3] Real (BRL) -> Libra esterlina (GBP)");
-Console.WriteLine("[4] Libra esterlina (GBP) -> Dólar (USD)");
+Console.WriteLine("[1] Real brasileiro (BRL) -> Dólar americano (USD)");
+Console.WriteLine("[2] Real brasileiro (BRL) -> Euro (EUR)");
+Console.WriteLine("[3] Real brasileiro (BRL) -> Libra esterlina (GBP)");
+Console.WriteLine("[4] Libra esterlina (GBP) -> Dólar americano (USD)");
 Console.WriteLine("[5] Libra esterlina (GBP) -> Euro (EUR)");
-Console.WriteLine("[6] Dólar (USD) -> Euro (EUR)\n");
+Console.WriteLine("[6] Dólar americano (USD) -> Euro (EUR)\n");
 
 int option = int.Parse(Console.ReadLine());
 Console.WriteLine();
@@ -20,7 +20,6 @@ Console.WriteLine();
 Console.Write("Digite o valor inteiro que deseja converter (sem centavos): ");
 
 long amount = long.Parse(Console.ReadLine());
-
 
 switch (option)
 {
