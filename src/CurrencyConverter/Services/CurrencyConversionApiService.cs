@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CurrencyConverter.Services
 {
-    internal class CurrencyConversionApiService
+    internal class CurrencyConversionApiService : ICurrencyConversionApiService
     {
         private HttpClient HttpClient { get; }
 
