@@ -1,7 +1,12 @@
 ﻿using CurrencyConverter.DTOs;
 using CurrencyConverter.Services;
+using System.Globalization;
 
-var service = new CurrencyConversionApiService();
+var culture = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentCulture = culture;
+CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+ICurrencyConversionApiService service = new CurrencyConversionApiService();
 
 Console.WriteLine("Seja bem-vindo ao conversor de moedas!\n");
 
@@ -14,45 +19,66 @@ Console.WriteLine("[4] Libra esterlina (GBP) -> Dólar americano (USD)");
 Console.WriteLine("[5] Libra esterlina (GBP) -> Euro (EUR)");
 Console.WriteLine("[6] Dólar americano (USD) -> Euro (EUR)\n");
 
-int option = int.Parse(Console.ReadLine());
+int option;
+while (!int.TryParse(Console.ReadLine(), out option) || option < 1 || option > 6)
+{
+    Console.Write("Opção inválida! Digite uma opção válida: ");
+}
+
 Console.WriteLine();
 
-Console.Write("Digite o valor inteiro que deseja converter (sem centavos): ");
+Console.Write("Digite o valor que deseja converter: ");
 
-long amount = long.Parse(Console.ReadLine());
-
-switch (option)
+decimal amount;
+while (!decimal.TryParse(Console.ReadLine(), out amount) || amount <= 0)
 {
-    case 1:
-        CurrencyConversionResponseDTO response1 = await service.ConvertCurrency("BRL", "USD", amount);
-        Console.WriteLine($"Conversão de {amount} BRL para {response1.ConversionResult} USD.");
-        break;
+    Console.Write("Valor inválido! Digite um valor válido que deseja converter: ");
+}
 
-    case 2:
-        CurrencyConversionResponseDTO response2 = await service.ConvertCurrency("BRL", "EUR", amount);
-        Console.WriteLine($"Conversão de {amount} BRL para {response2.ConversionResult} EUR.");
-        break;
-    case 3:
-        CurrencyConversionResponseDTO response3 = await service.ConvertCurrency("BRL", "GBP", amount);
-        Console.WriteLine($"Conversão de {amount} BRL para {response3.ConversionResult} GBP.");
-        break;
+Console.WriteLine();
 
-    case 4:
-        CurrencyConversionResponseDTO response4 = await service.ConvertCurrency("GBP", "USD", amount);
-        Console.WriteLine($"Conversão de {amount} GBP para {response4.ConversionResult} USD.");
-        break;
+await PrintCurrencyConverted(service, option, amount);
 
-    case 5:
-        CurrencyConversionResponseDTO response5 = await service.ConvertCurrency("GBP", "EUR", amount);
-        Console.WriteLine($"Conversão de {amount} GBP para {response5.ConversionResult} EUR.");
-        break;
+static async Task PrintCurrencyConverted(ICurrencyConversionApiService service, int option, decimal amount)
+{
+    CurrencyConversionResponseDTO? response = null;
 
-    case 6:
-        CurrencyConversionResponseDTO response6 = await service.ConvertCurrency("USD", "EUR", amount);
-        Console.WriteLine($"Conversão de {amount} USD para {response6.ConversionResult} EUR.");
-        break;
+    switch (option)
+    {
+        case 1:
+            response = await service.ConvertCurrency("BRL", "USD", amount);
+            break;
 
-    default:
-        Console.WriteLine("Opção inválida!");
-        break;
+        case 2:
+            response = await service.ConvertCurrency("BRL", "EUR", amount);
+            break;
+
+        case 3:
+            response = await service.ConvertCurrency("BRL", "GBP", amount);
+            break;
+
+        case 4:
+            response = await service.ConvertCurrency("GBP", "USD", amount);
+            break;
+
+        case 5:
+            response = await service.ConvertCurrency("GBP", "EUR", amount);
+            break;
+
+        case 6:
+            response = await service.ConvertCurrency("USD", "EUR", amount);
+            break;
+
+        default:
+            Console.WriteLine("Opção inválida!");
+            break;
+    }
+
+    if (response != null)
+    {
+        Console.WriteLine($"Conversão de {response.BaseCode} {amount} para {response.TargetCode} {response.ConversionResult}.");
+    } else
+    {
+        Console.WriteLine("Falha ao converter moeda.");
+    }
 }
