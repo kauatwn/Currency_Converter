@@ -1,5 +1,5 @@
-﻿using Currency_Converter.DTOs;
-using Currency_Converter.Services;
+﻿using CurrencyConverter.DTOs;
+using CurrencyConverter.Services;
 
 var service = new CurrencyConversionApiService();
 

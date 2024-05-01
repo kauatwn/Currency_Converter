@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Currency_Converter.DTOs
+namespace CurrencyConverter.DTOs
 {
     internal record CurrencyConversionResponseDTO
     {
@@ -35,6 +35,6 @@ namespace Currency_Converter.DTOs
         public double ConversionRate { get; init; }
 
         [JsonProperty("conversion_result")]
-        public long ConversionResult { get; init; }
+        public decimal ConversionResult { get; init; }
     }
 }

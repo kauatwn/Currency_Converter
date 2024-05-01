@@ -1,7 +1,7 @@
-﻿using Currency_Converter.DTOs;
+﻿using CurrencyConverter.DTOs;
 using Newtonsoft.Json;
 
-namespace Currency_Converter.Services
+namespace CurrencyConverter.Services
 {
     internal class CurrencyConversionApiService
     {
@@ -15,7 +15,7 @@ namespace Currency_Converter.Services
             };
         }
 
-        public async Task<CurrencyConversionResponseDTO> ConvertCurrency(string baseCode, string targetCode, long amount)
+        public async Task<CurrencyConversionResponseDTO> ConvertCurrency(string baseCode, string targetCode, decimal amount)
         {
             var response = await HttpClient.GetAsync($"v6/ea1dac06c76d73e87ffd46f9/pair/{baseCode}/{targetCode}/{amount}");
 
