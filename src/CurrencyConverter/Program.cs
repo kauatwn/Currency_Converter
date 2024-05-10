@@ -37,36 +37,36 @@ while (!decimal.TryParse(Console.ReadLine(), out amount) || amount <= 0)
 
 Console.WriteLine();
 
-await PrintCurrencyConverted(service, option, amount);
+await PrintCurrencyConvertedAsync(service, option, amount);
 
-static async Task PrintCurrencyConverted(ICurrencyConversionApiService service, int option, decimal amount)
+static async Task PrintCurrencyConvertedAsync(ICurrencyConversionApiService service, int option, decimal amount)
 {
     CurrencyConversionResponseDTO? response = null;
 
     switch (option)
     {
         case 1:
-            response = await service.ConvertCurrency("BRL", "USD", amount);
+            response = await service.ConvertCurrencyAsync("BRL", "USD", amount);
             break;
 
         case 2:
-            response = await service.ConvertCurrency("BRL", "EUR", amount);
+            response = await service.ConvertCurrencyAsync("BRL", "EUR", amount);
             break;
 
         case 3:
-            response = await service.ConvertCurrency("BRL", "GBP", amount);
+            response = await service.ConvertCurrencyAsync("BRL", "GBP", amount);
             break;
 
         case 4:
-            response = await service.ConvertCurrency("GBP", "USD", amount);
+            response = await service.ConvertCurrencyAsync("GBP", "USD", amount);
             break;
 
         case 5:
-            response = await service.ConvertCurrency("GBP", "EUR", amount);
+            response = await service.ConvertCurrencyAsync("GBP", "EUR", amount);
             break;
 
         case 6:
-            response = await service.ConvertCurrency("USD", "EUR", amount);
+            response = await service.ConvertCurrencyAsync("USD", "EUR", amount);
             break;
 
         default:
