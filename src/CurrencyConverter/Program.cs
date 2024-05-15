@@ -37,9 +37,9 @@ while (!decimal.TryParse(Console.ReadLine(), out amount) || amount <= 0)
 
 Console.WriteLine();
 
-await PrintCurrencyConvertedAsync(service, option, amount);
+await PrintConvertedCurrencyAsync(service, option, amount);
 
-static async Task PrintCurrencyConvertedAsync(ICurrencyConversionApiService service, int option, decimal amount)
+static async Task PrintConvertedCurrencyAsync(ICurrencyConversionApiService service, int option, decimal amount)
 {
     CurrencyConversionResponseDTO? response = null;
 
